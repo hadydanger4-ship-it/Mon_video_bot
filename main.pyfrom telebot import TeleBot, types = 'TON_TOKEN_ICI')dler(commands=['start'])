@@ -1,0 +1,20 @@
+from telebot import TeleBot, types
+
+API_TOKEN = '7959982217:AAHC-_xTJiUaxTPw6cA-5i0seorI19-2sGo'
+bot = TeleBot(API_TOKEN)
+
+@bot.message_handler(commands=['start'])
+def start(message):
+    markup = types.InlineKeyboardMarkup(row_width=2)
+    
+    # Création des boutons (exemples de ta capture)
+    btn1 = types.InlineKeyboardButton("🖼 Thumbnail Extractor", callback_data="thumb")
+    btn2 = types.InlineKeyboardButton("🎬 Video Converter", callback_data="convert")
+    btn3 = types.InlineKeyboardButton("🎵 Video To Audio", callback_data="toaudio")
+    btn4 = types.InlineKeyboardButton("✂️ Video Trimmer", callback_data="trim")
+    
+    markup.add(btn1, btn2, btn3, btn4)
+    bot.send_message(message.chat.id, "Please choose your desired action below 👇", reply_markup=markup)
+
+bot.polling()
+
